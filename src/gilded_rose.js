@@ -29,6 +29,12 @@ class Sulfuras extends Item {
   };
 };
 
+class BackStagePass extends Item {
+  calculateDepValue () {
+    return (-1);
+  };
+};
+
 class GildedRose {
   constructor(items = []) {
     this.items = items;
