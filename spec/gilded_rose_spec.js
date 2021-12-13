@@ -1,5 +1,12 @@
 describe("Gilded Rose", function () {
   describe("#qualityNextDay", function () {
+    describe("given AgedBrie", function () {
+      it("should increase quality value", function () {
+        const gildedRose = new GildedRose([ new Item("Aged Brie", 10, 10) ]);
+      const items = gildedRose.update_quality();
+        expect(items[0].quality).toEqual(11);
+      });
+    });
     it('should not reduce quality to less than zero', function () {
       const gildedRose = new GildedRose([ new Item("mango", 1, 0) ]);
       const items = gildedRose.update_quality();
@@ -41,6 +48,7 @@ describe("Gilded Rose", function () {
       var item = new Item("mango", 3, 52);
       expect(item.qualityNextDay()).toEqual(50);
     });
+    
     describe("given the item is past the sell-by-date", function () {
       it("should by two less than current quality", function () {
         var item = new Item("mango", 0, 3);
@@ -54,7 +62,7 @@ describe("Gilded Rose", function () {
       });
     });
     describe("given sulfuras as item", function () {
-      it("should value to zero", function () {
+      it("should value of quality be 50", function () {
         var item = new Sulfuras("sulfuras", 1, 50);
         expect(item.qualityNextDay()).toEqual(50);
       });
