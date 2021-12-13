@@ -64,6 +64,13 @@ describe("Gilded Rose", function () {
           expect(items[0].quality).toEqual(22);
         });
       });
+      describe("given 5 or fewer days until sell-by date", function () {
+        it("should increase by 3", function () {
+          const gildedRose = new GildedRose([ new Item("Backstage passes to a TAFKAL80ETC concert", 5, 20) ]);
+          const items = gildedRose.update_quality();
+          expect(items[0].quality).toEqual(23);
+        });
+      });
     });
     describe("given the item is not brie, sulfuras, backstage pass or conjured", function () {
       describe("given the item is within the sell-by-date", function () {
