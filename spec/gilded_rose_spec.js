@@ -6,6 +6,13 @@ describe("Gilded Rose", function () {
       it("should not change quality value", function () {
         expect(items[0].quality).toEqual(80);
       });
+      describe("given original quality is greater than 50", function () {
+        it("should not change quality value", function () {
+          const gildedRose = new GildedRose([ new Item("Sulfuras, Hand of Ragnaros", 0, 80) ]);
+          const items = gildedRose.update_quality();
+          expect(items[0].quality).toEqual(80);
+        });
+      });
     });
     describe("given AgedBrie", function () {
       it("should increase quality value", function () {
