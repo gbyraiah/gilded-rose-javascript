@@ -1,16 +1,29 @@
 describe("Gilded Rose", function () {
   describe("#qualityNextDay", function () {
-    describe('given that the sellIn value is less than 0', function () {
-      it('increases quality value by 2', function () {
-        let item = new DefaultItem('mango', 3, 0);
+    describe('given that the sellIn value is greater than 0', function () {
+      it('reduces quality value by 2', function () {
+        const testConjured = new ConjuredItem('conjured', 3, 10);
+        expect(testConjured.qualityNextDay()).toEqual(8);
+      });
+    });
+    describe('given that the sellIn value is 0 or less', function () {
+      it('increases quality value by 4', function () {
+        const testConjured = new ConjuredItem('conjured', 3, 10);
+        testConjured.sellIn = 0;
+        expect(testConjured.qualityNextDay()).toEqual(6);
+      });
+    });
+    describe("given that the sellIn value is less than 0", function () {
+      it("increases quality value by 2", function () {
+        let item = new DefaultItem("mango", 3, 0);
         item.quality = 3;
         item.sellIn = -1;
         expect(item.qualityNextDay()).toEqual(2);
       });
     });
-    describe('given that the sellIn value is less than 0', function () {
-      it('sets quality value to 0', function () {
-        let testPass = new BackStagePass('pass', -1, 20);
+    describe("given that the sellIn value is less than 0", function () {
+      it("sets quality value to 0", function () {
+        let testPass = new BackStagePass("pass", -1, 20);
         expect(testPass.qualityNextDay()).toEqual(0);
       });
     });
