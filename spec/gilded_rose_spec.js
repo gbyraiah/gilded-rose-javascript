@@ -20,5 +20,13 @@ describe("Gilded Rose", function () {
         expect(item.qualityNextDay()).toEqual(1);
       });
     });
+    describe("given aged brie", function () {
+      it("should be one more than current quality", function () {
+        var testItem = new AgedBrie('brie', 1, 1);
+        console.log(testItem.qualityNextDay());
+        console.log(testItem.calculateDepValue());
+        expect(testItem.qualityNextDay()).toEqual(2);
+      });
+    });
   });
 });
