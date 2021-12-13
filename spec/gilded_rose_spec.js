@@ -121,6 +121,13 @@ describe("Gilded Rose", function () {
         expect(item.qualityNextDay()).toEqual(3);
       });
     });
+    describe("given it is passed expiry", function () {
+      it("should increase quality value by 2", function () {
+        const gildedRose = new GildedRose([new Item("Aged Brie", 0, 20)]);
+        const items = gildedRose.update_quality();
+        expect(items[0].quality).toEqual(22);
+      });
+    });
     describe("given sulfuras as item", function () {
       it("should value of quality be 50", function () {
         var item = new Sulfuras("sulfuras", 1, 50);
