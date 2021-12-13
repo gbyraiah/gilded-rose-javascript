@@ -1,5 +1,11 @@
 describe("Gilded Rose", function () {
   describe("#qualityNextDay", function () {
+    describe('given that the sellIn value is less than 0', function () {
+      it('sets quality value to 0', function () {
+        var testPass = new BackStagePass('pass', -1, 20);
+        expect(testPass.qualityNextDay()).toEqual(0);
+      });
+    });
     describe("given the item is not Sulfuras", function () {
       it("should decrease sellIn value by one", function () {
         const gildedRose = new GildedRose([new Item("Mango", 1, 1)]);

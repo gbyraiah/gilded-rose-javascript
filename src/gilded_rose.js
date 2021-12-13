@@ -24,29 +24,45 @@ class Item {
   }
 }
 
-class AgedBrie extends Item {
+class DefaultItem extends Item {
+  itemNextDay() {
+    this.quality = this.qualityNextDay();
+  }
+}
+class AgedBrie extends DefaultItem {
   calculateDepValue() {
     return this.sellIn <= 0 ? -2 : -1;
   }
 }
 
-class Sulfuras extends Item {
+class Sulfuras extends DefaultItem {
+  calculateDepValue() {
+    return 0;
+  }
+
   itemNextDay() {
     return this;
   }
 }
 
-class BackStagePass extends Item {
+class BackStagePass extends DefaultItem {
   calculateDepValue() {
-    if (this.sellIn === 0) {
-      return this.quality;
-    } else if (this.sellIn <= 5) {
-      return -3;
-    } else if (this.sellIn <= 10) {
-      return -2;
-    } else {
-      return -1;
+    switch (true) {
+      case (this.sellIn <= 0):
+        return this.quality;
+      case this.sellIn <= 5:
+        return -3;
+      case this.sellIn <= 10:
+        return -2;
+      default:
+        return -1;
     }
+  }
+}
+
+class ConjuredItem extends DefaultItem {
+  calculateDepValue() {
+    return this.sellIn <= 0 ? 4 : 2;
   }
 }
 
@@ -55,14 +71,8 @@ class GildedRose {
     this.items = items;
   }
 
-  updateInventory(items) {
-    return items.map(function (item) {
-      return item.itemTomorrow();
-    });
-  }
-
   update_quality() {
-    for (var i = 0; i < this.items.length; i++) {
+    for (let i = 0; i < this.items.length; i++) {
       this.items[i].quality = this.items[i].qualityNextDay();
       if (this.items[i].name != "Sulfuras, Hand of Ragnaros") {
         this.items[i].sellIn = this.items[i].sellIn - 1;
