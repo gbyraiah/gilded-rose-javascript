@@ -6,6 +6,7 @@ describe("Gilded Rose", function () {
         it("should by one less than current quality", function () {
           var testItem = new Item("mango", 3, 3);
           expect(testItem.qualityNextDay()).toEqual(2);
+          expect(testItem.qualityNextDay()).toEqual(2);
         });
       });
     });

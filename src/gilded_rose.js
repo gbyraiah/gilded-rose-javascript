@@ -6,7 +6,8 @@ class Item {
   }
 
   qualityNextDay () {
-    return 2;
+    let qualityNextDay = this.quality - 1;
+    return qualityNextDay;
   }
 }
 
