@@ -1,5 +1,12 @@
 describe("Gilded Rose", function () {
   describe("#qualityNextDay", function () {
+    describe("given Sulfuras", function () {
+      const gildedRose = new GildedRose([ new Item("Sulfuras, Hand of Ragnaros", 0, 80) ]);
+      const items = gildedRose.update_quality();
+      it("should not change quality value", function () {
+        expect(items[0].quality).toEqual(80);
+      });
+    });
     describe("given AgedBrie", function () {
       it("should increase quality value", function () {
         const gildedRose = new GildedRose([ new Item("Aged Brie", 10, 10) ]);
