@@ -10,6 +10,13 @@ describe("Gilded Rose", function () {
       const items = gildedRose.update_quality();
       expect(items[0].sellIn).toEqual(0);
     });
+    describe('given the item is "Sulfuras"', function () {
+      it('should not reduce sellIn value', function () {
+        const gildedRose = new GildedRose([ new Item("Sulfuras, Hand of Ragnaros", 1, 0) ]);
+        const items = gildedRose.update_quality();
+        expect(items[0].sellIn).toEqual(1);
+      });
+    });
     describe("given the item is not brie, sulfuras, backstage pass or conjured", function () {
       describe("given the item is within the sell-by-date", function () {
         it("should by one less than current quality", function () {
