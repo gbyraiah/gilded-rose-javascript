@@ -127,6 +127,10 @@ describe("Gilded Rose", function () {
         const items = gildedRose.update_quality();
         expect(items[0].quality).toEqual(22);
       });
+      it("should be two more than current quality", function () {
+        var testItem = new AgedBrie('brie', 0, 1);
+        expect(testItem.qualityNextDay()).toEqual(3);
+      });
     });
     describe("given sulfuras as item", function () {
       it("should value of quality be 50", function () {
