@@ -20,14 +20,12 @@ describe("Gilded Rose", function () {
     });
     describe("given AgedBrie", function () {
       it("should increase quality value", function () {
-        const gildedRose = new GildedRose([new Item("Aged Brie", 10, 10)]);
-        const items = gildedRose.update_quality();
-        expect(items[0].quality).toEqual(11);
+        var item = new AgedBrie('brie', 10, 10);
+        expect(item.qualityNextDay()).toEqual(11);
       });
       it("should not increase quality value above 50", function () {
-        const gildedRose = new GildedRose([new Item("Aged Brie", 10, 50)]);
-        const items = gildedRose.update_quality();
-        expect(items[0].quality).toEqual(50);
+        var item = new AgedBrie('brie', 10, 50);
+        expect(item.qualityNextDay()).toEqual(50);
       });
     });
     it("should not reduce quality to less than zero", function () {
