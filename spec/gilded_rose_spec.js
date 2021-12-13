@@ -7,6 +7,12 @@ describe("Gilded Rose", function () {
         expect(items[0].sellIn).toEqual(0);
       });
     });
+    describe('given that the item is sulfuras', function () {
+      it('should not reduce sellIn value', function () {
+        testItem = new Sulfuras('sulfuras', 1, 80);
+        expect(testItem.itemNextDay().sellIn).toEqual(1);
+      });
+    });
     describe("given Sulfuras", function () {
       const gildedRose = new GildedRose([
         new Item("Sulfuras, Hand of Ragnaros", 0, 80),

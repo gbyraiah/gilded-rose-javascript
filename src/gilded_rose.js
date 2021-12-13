@@ -33,6 +33,10 @@ class Sulfuras extends Item {
   calculateDepValue() {
     return 0;
   }
+
+  itemNextDay() {
+    return this;
+  }
 }
 
 class BackStagePass extends Item {
