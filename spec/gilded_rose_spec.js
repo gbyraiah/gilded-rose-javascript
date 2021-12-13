@@ -5,6 +5,11 @@ describe("Gilded Rose", function () {
       const items = gildedRose.update_quality();
       expect(items[0].quality).toEqual(0);
     });
+    it('should reduce days to sell by one', function () {
+      const gildedRose = new GildedRose([ new Item("mango", 1, 0) ]);
+      const items = gildedRose.update_quality();
+      expect(items[0].sellIn).toEqual(0);
+    });
     describe("given the item is not brie, sulfuras, backstage pass or conjured", function () {
       describe("given the item is within the sell-by-date", function () {
         it("should by one less than current quality", function () {
