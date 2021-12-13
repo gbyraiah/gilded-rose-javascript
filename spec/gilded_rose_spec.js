@@ -10,5 +10,9 @@ describe("Gilded Rose", function () {
         });
       });
     });
+    it("should never decrease past zero", function () {
+      var testItem = new Item('mango', 3, 0);
+      expect(testItem.qualityNextDay()).toEqual(0);
+    })
   });
 });
