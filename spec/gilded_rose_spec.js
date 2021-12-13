@@ -49,7 +49,10 @@ describe("Gilded Rose", function () {
         });
       });
       describe("given 5 or fewer days until sell-by date", function () {
-        it("should increase by 3");
+        it("should increase by 3", function () {
+          var testItem = new BackStagePass('pass', 5, 20);
+          expect(testItem.qualityNextDay()).toEqual(23);
+        });
       });
       describe("given that the item has expired", function () {
         it("should be zero");

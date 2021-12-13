@@ -31,7 +31,13 @@ class Sulfuras extends Item {
 
 class BackStagePass extends Item {
   calculateDepValue () {
-    return this.sellIn <= 10 ? (-2) : (-1);
+    if (this.sellIn <= 5) {
+      return (-3);
+    } else if (this.sellIn <= 10) {
+      return (-2);
+    } else {
+      return (-1);
+    }
   };
 };
 
