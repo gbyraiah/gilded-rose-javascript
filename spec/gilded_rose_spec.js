@@ -105,9 +105,8 @@ describe("Gilded Rose", function () {
     });
     describe("given it is passed expiry", function () {
       it("should increase quality value by 2", function () {
-        const gildedRose = new GildedRose([new Item("Aged Brie", 0, 20)]);
-        const items = gildedRose.update_quality();
-        expect(items[0].quality).toEqual(22);
+        var item = new AgedBrie("brie", 0, 20);
+        expect(item.qualityNextDay()).toEqual(22);
       });
       it("should be two more than current quality", function () {
         var item = new AgedBrie("brie", 0, 1);
