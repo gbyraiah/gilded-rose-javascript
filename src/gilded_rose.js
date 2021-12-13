@@ -19,7 +19,7 @@ class Item {
 
 class AgedBrie extends Item {
   calculateDepValue () {
-    return (-1);
+    return this.sellIn <= 0 ? (-2) : (-1);
   }
 };
 

@@ -59,21 +59,27 @@ describe("Gilded Rose", function () {
       });
       describe("given 10 or fewer days until sell-by date", function () {
         it("should increase by 2", function () {
-          const gildedRose = new GildedRose([ new Item("Backstage passes to a TAFKAL80ETC concert", 10, 20) ]);
+          const gildedRose = new GildedRose([
+            new Item("Backstage passes to a TAFKAL80ETC concert", 10, 20),
+          ]);
           const items = gildedRose.update_quality();
           expect(items[0].quality).toEqual(22);
         });
       });
       describe("given 5 or fewer days until sell-by date", function () {
         it("should increase by 3", function () {
-          const gildedRose = new GildedRose([ new Item("Backstage passes to a TAFKAL80ETC concert", 5, 20) ]);
+          const gildedRose = new GildedRose([
+            new Item("Backstage passes to a TAFKAL80ETC concert", 5, 20),
+          ]);
           const items = gildedRose.update_quality();
           expect(items[0].quality).toEqual(23);
         });
       });
       describe("given that concert has happened", function () {
         it("should be zero", function () {
-          const gildedRose = new GildedRose([ new Item("Backstage passes to a TAFKAL80ETC concert", 0, 20) ]);
+          const gildedRose = new GildedRose([
+            new Item("Backstage passes to a TAFKAL80ETC concert", 0, 20),
+          ]);
           const items = gildedRose.update_quality();
           expect(items[0].quality).toEqual(0);
         });
@@ -107,6 +113,12 @@ describe("Gilded Rose", function () {
       it("should be one more than current quality", function () {
         var item = new AgedBrie("brie", 1, 1);
         expect(item.qualityNextDay()).toEqual(2);
+      });
+    });
+    describe("given it is passed expiry", function () {
+      it("should be equal to 3", function () {
+        var item = new AgedBrie("brie", 0, 1);
+        expect(item.qualityNextDay()).toEqual(3);
       });
     });
     describe("given sulfuras as item", function () {
