@@ -13,6 +13,11 @@ class Item {
     return qualityNextDay;
   }
 
+  itemNextDay() {
+    this.sellIn--;
+    return this;
+  }
+
   calculateDepValue() {
     return this.sellIn === 0 ? 2 : 1;
   }

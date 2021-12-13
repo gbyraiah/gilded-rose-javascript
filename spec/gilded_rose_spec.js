@@ -1,5 +1,12 @@
 describe("Gilded Rose", function () {
   describe("#qualityNextDay", function () {
+    describe("given the item is not Sulfuras", function () {
+      it("should decrease sellIn value by one", function () {
+        const gildedRose = new GildedRose([new Item("Mango", 1, 1)]);
+        const items = gildedRose.update_quality();
+        expect(items[0].sellIn).toEqual(0);
+      });
+    });
     describe("given Sulfuras", function () {
       const gildedRose = new GildedRose([
         new Item("Sulfuras, Hand of Ragnaros", 0, 80),
@@ -20,11 +27,11 @@ describe("Gilded Rose", function () {
     });
     describe("given AgedBrie", function () {
       it("should increase quality value", function () {
-        var item = new AgedBrie('brie', 10, 10);
+        var item = new AgedBrie("brie", 10, 10);
         expect(item.qualityNextDay()).toEqual(11);
       });
       it("should not increase quality value above 50", function () {
-        var item = new AgedBrie('brie', 10, 50);
+        var item = new AgedBrie("brie", 10, 50);
         expect(item.qualityNextDay()).toEqual(50);
       });
     });
@@ -48,22 +55,22 @@ describe("Gilded Rose", function () {
     describe("given BackStagePass", function () {
       describe("given 10 or fewer days until sell-by date", function () {
         it("should increase by 2", function () {
-          var testItem = new BackStagePass('pass', 10, 20);
+          var testItem = new BackStagePass("pass", 10, 20);
           expect(testItem.qualityNextDay()).toEqual(22);
         });
       });
       describe("given 5 or fewer days until sell-by date", function () {
         it("should increase by 3", function () {
-          var testItem = new BackStagePass('pass', 5, 20);
+          var testItem = new BackStagePass("pass", 5, 20);
           expect(testItem.qualityNextDay()).toEqual(23);
         });
       });
       describe("given that concert has happened", function () {
         it("should be zero", function () {
-          var testItem = new BackStagePass('pass', 0, 20);
+          var testItem = new BackStagePass("pass", 0, 20);
           expect(testItem.qualityNextDay()).toEqual(0);
         });
-      })
+      });
     });
     describe("given the item is not brie, sulfuras, backstage pass or conjured", function () {
       describe("given the item is within the sell-by-date", function () {
@@ -79,7 +86,7 @@ describe("Gilded Rose", function () {
       expect(item.qualityNextDay()).toEqual(0);
     });
     it("should never be higher than 50", function () {
-      var item = new AgedBrie('brie', 3, 50);
+      var item = new AgedBrie("brie", 3, 50);
       expect(item.qualityNextDay()).toEqual(50);
     });
 
