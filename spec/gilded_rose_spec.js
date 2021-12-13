@@ -55,7 +55,10 @@ describe("Gilded Rose", function () {
         });
       });
       describe("given that the item has expired", function () {
-        it("should be zero");
+        it("should be zero", function () {
+          var item = new BackStagePass('pass', 0, 20);
+          expect(item.qualityNextDay()).toEqual(0);
+        });
       });
     });
   });
