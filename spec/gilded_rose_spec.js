@@ -59,31 +59,22 @@ describe("Gilded Rose", function () {
       });
       describe("given 10 or fewer days until sell-by date", function () {
         it("should increase by 2", function () {
-          const gildedRose = new GildedRose([
-            new Item("Backstage passes to a TAFKAL80ETC concert", 10, 20),
-          ]);
-          const items = gildedRose.update_quality();
-          expect(items[0].quality).toEqual(22);
+          var testItem = new BackStagePass('pass', 10, 20);
+          expect(testItem.qualityNextDay()).toEqual(22);
         });
       });
       describe("given 5 or fewer days until sell-by date", function () {
         it("should increase by 3", function () {
-          const gildedRose = new GildedRose([
-            new Item("Backstage passes to a TAFKAL80ETC concert", 5, 20),
-          ]);
-          const items = gildedRose.update_quality();
-          expect(items[0].quality).toEqual(23);
+          var testItem = new BackStagePass('pass', 5, 20);
+          expect(testItem.qualityNextDay()).toEqual(23);
         });
       });
       describe("given that concert has happened", function () {
         it("should be zero", function () {
-          const gildedRose = new GildedRose([
-            new Item("Backstage passes to a TAFKAL80ETC concert", 0, 20),
-          ]);
-          const items = gildedRose.update_quality();
-          expect(items[0].quality).toEqual(0);
+          var testItem = new BackStagePass('pass', 0, 20);
+          expect(testItem.qualityNextDay()).toEqual(0);
         });
-      });
+      })
     });
     describe("given the item is not brie, sulfuras, backstage pass or conjured", function () {
       describe("given the item is within the sell-by-date", function () {
@@ -99,7 +90,7 @@ describe("Gilded Rose", function () {
       expect(item.qualityNextDay()).toEqual(0);
     });
     it("should never be higher than 50", function () {
-      var item = new Item("mango", 3, 52);
+      var item = new AgedBrie('brie', 3, 50);
       expect(item.qualityNextDay()).toEqual(50);
     });
 
@@ -128,8 +119,8 @@ describe("Gilded Rose", function () {
         expect(items[0].quality).toEqual(22);
       });
       it("should be two more than current quality", function () {
-        var testItem = new AgedBrie('brie', 0, 1);
-        expect(testItem.qualityNextDay()).toEqual(3);
+        var item = new AgedBrie("brie", 0, 1);
+        expect(item.qualityNextDay()).toEqual(3);
       });
     });
     describe("given sulfuras as item", function () {

@@ -6,6 +6,7 @@ class Item {
   }
 
   qualityNextDay() {
+    if (this.quality > 50) return this.quality;
     let qualityNextDay = this.quality - this.calculateDepValue();
     if (qualityNextDay < 0) return 0;
     if (qualityNextDay >= 50) return 50;
@@ -18,35 +19,36 @@ class Item {
 }
 
 class AgedBrie extends Item {
-  calculateDepValue () {
-    return this.sellIn <= 0 ? (-2) : (-1);
+  calculateDepValue() {
+    return this.sellIn <= 0 ? -2 : -1;
   }
-};
+}
 
 class Sulfuras extends Item {
-  calculateDepValue () {
+  calculateDepValue() {
     return 0;
-  };
-};
+  }
+}
 
 class BackStagePass extends Item {
-  calculateDepValue () {
+  calculateDepValue() {
     if (this.sellIn === 0) {
       return this.quality;
     } else if (this.sellIn <= 5) {
-      return (-3);
+      return -3;
     } else if (this.sellIn <= 10) {
-      return (-2);
+      return -2;
     } else {
-      return (-1);
+      return -1;
     }
-  };
-};
+  }
+}
 
 class GildedRose {
   constructor(items = []) {
     this.items = items;
   }
+
   update_quality() {
     for (var i = 0; i < this.items.length; i++) {
       if (
@@ -66,12 +68,12 @@ class GildedRose {
           ) {
             if (this.items[i].sellIn < 11) {
               if (this.items[i].quality < 50) {
-                this.items[i].quality = this.items[i].quality + 1;
+                this.items[i].quality = this.items[i].qualityNextDay();
               }
             }
             if (this.items[i].sellIn < 6) {
               if (this.items[i].quality < 50) {
-                this.items[i].quality = this.items[i].quality + 1;
+                this.items[i].quality = this.items[i].qualityNextDay();
               }
             }
           }
@@ -91,8 +93,7 @@ class GildedRose {
               }
             }
           } else {
-            this.items[i].quality =
-              this.items[i].quality - this.items[i].quality;
+            this.items[i].quality = this.items[i].qualityNextDay();
           }
         } else {
           if (this.items[i].quality < 50) {
