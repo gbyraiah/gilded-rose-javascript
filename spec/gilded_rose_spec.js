@@ -7,9 +7,16 @@ describe("Gilded Rose", function () {
         expect(items[0].sellIn).toEqual(0);
       });
     });
-    describe('given that the item is sulfuras', function () {
-      it('should not reduce sellIn value', function () {
-        testItem = new Sulfuras('sulfuras', 1, 80);
+    describe("given the item is not Sulfuras", function () {
+      it("should decrease sellIn value by one", function () {
+        const gildedRose = new GildedRose([new Item("Mango", 1, 1)]);
+        const itemsTomorrow = gildedRose.update_quality();
+        expect(itemsTomorrow[0].sellIn).toEqual(0);
+      });
+    });
+    describe("given that the item is sulfuras", function () {
+      it("should not reduce sellIn value", function () {
+        testItem = new Sulfuras("sulfuras", 1, 80);
         expect(testItem.itemNextDay().sellIn).toEqual(1);
       });
     });

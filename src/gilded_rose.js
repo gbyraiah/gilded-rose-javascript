@@ -14,6 +14,7 @@ class Item {
   }
 
   itemNextDay() {
+    this.quality = this.qualityNextDay();
     this.sellIn--;
     return this;
   }
@@ -30,10 +31,6 @@ class AgedBrie extends Item {
 }
 
 class Sulfuras extends Item {
-  calculateDepValue() {
-    return 0;
-  }
-
   itemNextDay() {
     return this;
   }
@@ -58,10 +55,16 @@ class GildedRose {
     this.items = items;
   }
 
+  updateInventory(items) {
+    return items.map(function (item) {
+      return item.itemTomorrow();
+    });
+  }
+
   update_quality() {
     for (var i = 0; i < this.items.length; i++) {
       this.items[i].quality = this.items[i].qualityNextDay();
-      if (this.items[i].name != 'Sulfuras, Hand of Ragnaros') {
+      if (this.items[i].name != "Sulfuras, Hand of Ragnaros") {
         this.items[i].sellIn = this.items[i].sellIn - 1;
       }
     }
