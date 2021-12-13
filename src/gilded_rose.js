@@ -48,7 +48,7 @@ class Sulfuras extends DefaultItem {
 class BackStagePass extends DefaultItem {
   calculateDepValue() {
     switch (true) {
-      case (this.sellIn <= 0):
+      case this.sellIn <= 0:
         return this.quality;
       case this.sellIn <= 5:
         return -3;
@@ -72,13 +72,8 @@ class GildedRose {
   }
 
   update_quality() {
-    for (let i = 0; i < this.items.length; i++) {
-      this.items[i].quality = this.items[i].qualityNextDay();
-      if (this.items[i].name != "Sulfuras, Hand of Ragnaros") {
-        this.items[i].sellIn = this.items[i].sellIn - 1;
-      }
-    }
-
-    return this.items;
+    return this.items.map(function (item) {
+      return item.itemNextDay();
+    });
   }
 }
