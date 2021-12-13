@@ -1,14 +1,18 @@
 describe("Gilded Rose", function () {
   describe("#qualityNextDay", function () {
     describe("given Sulfuras", function () {
-      const gildedRose = new GildedRose([ new Item("Sulfuras, Hand of Ragnaros", 0, 80) ]);
+      const gildedRose = new GildedRose([
+        new Item("Sulfuras, Hand of Ragnaros", 0, 80),
+      ]);
       const items = gildedRose.update_quality();
       it("should not change quality value", function () {
         expect(items[0].quality).toEqual(80);
       });
       describe("given original quality is greater than 50", function () {
         it("should not change quality value", function () {
-          const gildedRose = new GildedRose([ new Item("Sulfuras, Hand of Ragnaros", 0, 80) ]);
+          const gildedRose = new GildedRose([
+            new Item("Sulfuras, Hand of Ragnaros", 0, 80),
+          ]);
           const items = gildedRose.update_quality();
           expect(items[0].quality).toEqual(80);
         });
@@ -16,38 +20,42 @@ describe("Gilded Rose", function () {
     });
     describe("given AgedBrie", function () {
       it("should increase quality value", function () {
-        const gildedRose = new GildedRose([ new Item("Aged Brie", 10, 10) ]);
-      const items = gildedRose.update_quality();
+        const gildedRose = new GildedRose([new Item("Aged Brie", 10, 10)]);
+        const items = gildedRose.update_quality();
         expect(items[0].quality).toEqual(11);
       });
       it("should not increase quality value above 50", function () {
-        const gildedRose = new GildedRose([ new Item("Aged Brie", 10, 50) ]);
-      const items = gildedRose.update_quality();
+        const gildedRose = new GildedRose([new Item("Aged Brie", 10, 50)]);
+        const items = gildedRose.update_quality();
         expect(items[0].quality).toEqual(50);
       });
     });
-    it('should not reduce quality to less than zero', function () {
-      const gildedRose = new GildedRose([ new Item("mango", 1, 0) ]);
+    it("should not reduce quality to less than zero", function () {
+      const gildedRose = new GildedRose([new Item("mango", 1, 0)]);
       const items = gildedRose.update_quality();
       expect(items[0].quality).toEqual(0);
     });
-    it('should reduce days to sell by one', function () {
-      const gildedRose = new GildedRose([ new Item("mango", 1, 0) ]);
+    it("should reduce days to sell by one", function () {
+      const gildedRose = new GildedRose([new Item("mango", 1, 0)]);
       const items = gildedRose.update_quality();
       expect(items[0].sellIn).toEqual(0);
     });
     describe("given that item is not brie, sulfuras, backstage pass", function () {
       it("should reduce quality value by 1", function () {
-        const gildedRose = new GildedRose([ new Item("mango", 1, 0) ]);
+        const gildedRose = new GildedRose([new Item("mango", 1, 0)]);
         const items = gildedRose.update_quality();
         expect(items[0].quality).toEqual(0);
-      })
-    })
-    describe('given the item is "Sulfuras"', function () {
-      it('should not reduce sellIn value', function () {
-        const gildedRose = new GildedRose([ new Item("Sulfuras, Hand of Ragnaros", 1, 0) ]);
-        const items = gildedRose.update_quality();
-        expect(items[0].sellIn).toEqual(1);
+      });
+    });
+    describe("given BackStagePass", function () {
+      describe("given there are more than 10 days until expiry", function () {
+        it("should increase by 1", function () {
+          const gildedRose = new GildedRose([
+            new Item("Backstage passes to a TAFKAL80ETC concert", 11, 20),
+          ]);
+          const items = gildedRose.update_quality();
+          expect(items[0].quality).toEqual(21);
+        });
       });
     });
     describe("given the item is not brie, sulfuras, backstage pass or conjured", function () {
@@ -67,7 +75,7 @@ describe("Gilded Rose", function () {
       var item = new Item("mango", 3, 52);
       expect(item.qualityNextDay()).toEqual(50);
     });
-    
+
     describe("given the item is past the sell-by-date", function () {
       it("should by two less than current quality", function () {
         var item = new Item("mango", 0, 3);
@@ -89,25 +97,25 @@ describe("Gilded Rose", function () {
     describe("given BackStagePass", function () {
       describe("given it is has more than 10 days to expire", function () {
         it("should increase by 1", function () {
-          var testItem = new BackStagePass('pass', 11, 20);
+          var testItem = new BackStagePass("pass", 11, 20);
           expect(testItem.qualityNextDay()).toEqual(21);
         });
       });
       describe("given 10 or fewer days until sell-by date", function () {
         it("should increase by 2", function () {
-          var testItem = new BackStagePass('pass', 10, 20);
+          var testItem = new BackStagePass("pass", 10, 20);
           expect(testItem.qualityNextDay()).toEqual(22);
         });
       });
       describe("given 5 or fewer days until sell-by date", function () {
         it("should increase by 3", function () {
-          var testItem = new BackStagePass('pass', 5, 20);
+          var testItem = new BackStagePass("pass", 5, 20);
           expect(testItem.qualityNextDay()).toEqual(23);
         });
       });
       describe("given that the item has expired", function () {
         it("should be zero", function () {
-          var item = new BackStagePass('pass', 0, 20);
+          var item = new BackStagePass("pass", 0, 20);
           expect(item.qualityNextDay()).toEqual(0);
         });
       });
