@@ -48,15 +48,6 @@ describe("Gilded Rose", function () {
       });
     });
     describe("given BackStagePass", function () {
-      describe("given there are more than 10 days until expiry", function () {
-        it("should increase by 1", function () {
-          const gildedRose = new GildedRose([
-            new Item("Backstage passes to a TAFKAL80ETC concert", 11, 20),
-          ]);
-          const items = gildedRose.update_quality();
-          expect(items[0].quality).toEqual(21);
-        });
-      });
       describe("given 10 or fewer days until sell-by date", function () {
         it("should increase by 2", function () {
           var testItem = new BackStagePass('pass', 10, 20);
