@@ -14,18 +14,26 @@ describe("Gilded Rose", function () {
       var item = new Item('mango', 3, 0);
       expect(item.qualityNextDay()).toEqual(0);
     });
+    it("should never be higher than 50", function () {
+      var item = new Item('mango', 3, 52);
+      expect(item.qualityNextDay()).toEqual(50);
+    });
     describe("given the item is past the sell-by-date", function () {
       it("should by two less than current quality", function () {
-        var item = new Item('apple', 0, 3);
+        var item = new Item('mango', 0, 3);
         expect(item.qualityNextDay()).toEqual(1);
       });
     });
     describe("given aged brie", function () {
       it("should be one more than current quality", function () {
-        var testItem = new AgedBrie('brie', 1, 1);
-        console.log(testItem.qualityNextDay());
-        console.log(testItem.calculateDepValue());
-        expect(testItem.qualityNextDay()).toEqual(2);
+        var item = new AgedBrie('brie', 1, 1);
+        expect(item.qualityNextDay()).toEqual(2);
+      });
+    });
+    describe("given sulfuras as item", function () {
+      it("should value to zero", function () {
+        var item = new Sulfuras('sulfuras', 1, 50);
+        expect(item.qualityNextDay()).toEqual(50);
       });
     });
   });

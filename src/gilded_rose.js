@@ -8,6 +8,7 @@ class Item {
   qualityNextDay() {
     let qualityNextDay = this.quality - this.calculateDepValue();
     if (qualityNextDay < 0) return 0;
+    if (qualityNextDay >= 50) return 50;
     return qualityNextDay;
   }
 
@@ -20,6 +21,12 @@ class AgedBrie extends Item {
   calculateDepValue () {
     return (-1);
   }
+};
+
+class Sulfuras extends Item {
+  calculateDepValue () {
+    return 0;
+  };
 };
 
 class GildedRose {
