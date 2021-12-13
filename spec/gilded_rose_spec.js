@@ -1,5 +1,10 @@
 describe("Gilded Rose", function () {
   describe("#qualityNextDay", function () {
+    it('should not reduce quality to less than zero', function () {
+      const gildedRose = new GildedRose([ new Item("mango", 1, 0) ]);
+      const items = gildedRose.update_quality();
+      expect(items[0].quality).toEqual(0);
+    });
     describe("given the item is not brie, sulfuras, backstage pass or conjured", function () {
       describe("given the item is within the sell-by-date", function () {
         it("should by one less than current quality", function () {
